@@ -1,0 +1,26 @@
+{
+  "name": "financial-control",
+  "version": "1.0.0",
+  "description": "a financial control system",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine ./tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicente-nvt/financial-control.git"
+  },
+  "author": "José Vicente Neto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vicente-nvt/financial-control/issues"
+  },
+  "homepage": "https://github.com/vicente-nvt/financial-control#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.16.4",
+    "jasmine": "^3.3.0",
+    "mysql": "^2.16.0"
+  }
+}
