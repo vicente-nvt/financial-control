@@ -29,7 +29,6 @@ class DatabaseConnection {
     }
 
     handleQueryCallback(error, result, callback) {
-        console.log(error);
         if (error)
             callback(error);
 

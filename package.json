@@ -4,7 +4,8 @@
   "description": "a financial control system",
   "main": "app.js",
   "scripts": {
-    "test": "jasmine ./tests/*.js"
+    "test": "jasmine ./tests/*.js",
+    "migrate": "node ./config/migration.js up"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "consign": "^0.1.6",
     "express": "^4.16.4",
     "jasmine": "^3.3.0",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "mysql-migrations": "^1.0.6"
   }
 }

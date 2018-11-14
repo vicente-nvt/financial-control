@@ -1,18 +1,15 @@
-var CommitmentRepository = require("../../domain/commitment/repository");
-var DatabaseConnection = require("../../config/dbConnection");
+var CommitmentController = require("../../controllers/commitment");
 
 module.exports = (application) => {
 
-    var dbConnection = new DatabaseConnection();
-    var commitmentRepository = new CommitmentRepository(dbConnection);
+    var commitmentController = new CommitmentController();
 
     application.get("/commitments", (_, res) => {
-        commitmentRepository.getCommitments(sendDataBack(res));
+        commitmentController.getCommitments(sendDataBack(res));
     });
 
     application.post("/commitment", (req, res) => {
-        var commitment = req.body.commitment;
-        commitmentRepository.addCommitment(commitment, () => {res.sendStatus(200)});
+        commitmentController.addCommitment(req.body, (result) => {res.send(result)});
     });
 };
 
