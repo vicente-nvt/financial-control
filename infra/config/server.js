@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
 consign()
-    .include("application/routes")
+    .include("infra/routes")
     .into(app);
 
 module.exports = app;

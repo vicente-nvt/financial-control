@@ -1,7 +1,6 @@
 class Commitment{
 
-    constructor(description, effectiveValue, expectedValue,
-        expiryDate, movement, plot, totalPlots, type, grouper) {
+    constructor(commitmentDto, validator) {
         this.description = description;
         this.effectiveValue = effectiveValue;
         this.expectedValue = expectedValue;

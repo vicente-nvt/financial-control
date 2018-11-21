@@ -1,20 +1,25 @@
-var CommitmentRepository = require("../domain/commitment/repository");
-var DatabaseConnection = require("../config/dbConnection");
+var CommitmentManager = require("../application/commitment-manager");
 
 class CommitmentController{
 
-    constructor() {
-        var dbConnection = new DatabaseConnection();
-        this.commitmentRepository = new CommitmentRepository(dbConnection);
+    constructor(){
+        this.commitmentManager = new CommitmentManager();
     }
 
-    getCommitments(callback) {
-        this.commitmentRepository.getCommitments(callback);
+    getCommitments(req, res) {
+        this.commitmentManager.getCommitments((commitments) => {
+            res.send(commitments);
+        });
     }
 
-    addCommitment(bodyData, callback){
-        var dataCommitment = bodyData.commitment;
-        this.commitmentRepository.addCommitment(dataCommitment, callback);
+    addCommitment(req, res){
+        var commitmentDto = req.body.commitment;
+        this.commitmentManager.addCommitment(commitmentDto, (error) => {
+            if (!error) 
+                res.send(error);
+            else
+                res.sendStatus(200);
+        });
     }
 }
 
