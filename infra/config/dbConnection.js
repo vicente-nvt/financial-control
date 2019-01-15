@@ -6,33 +6,45 @@ class DatabaseConnection {
         this.connection = mySQLConnection;
     }
 
-    getAll(tableName, callback){
+    getAll(tableName){
         var sql = `select * from ${tableName}`;
-        this.executeQuery(sql, callback);
+        return this.executeQuery(sql);
     }
 
-    add(tableName, data, callback){
+    getById(tableName, id) {
+        var sql = `select * from ${tableName} where id = ${id}`;
+        return this.executeQuery(sql);
+    }
+
+    add(tableName, data) {
         var sql = `insert into ${tableName} set ?`;
-        this.insertData(sql, data, callback);
-    }
 
-    insertData(sql, data, callback){
-        this.connection().query(sql, data, (error, result) => {
-            this.handleQueryCallback(error, result, callback);
+        return new Promise(async (resolve, reject) => {
+            await this.connection().query(sql, data, (error) => {
+                if (error)
+                    this.handleError(error, reject);
+
+                resolve();
+            });
         });
     }
 
-    executeQuery(sql, callback) {
-        this.connection().query(sql, (error, result) => {
-            this.handleQueryCallback(error, result, callback);
+    executeQuery(sql) {
+        return new Promise(async (resolve, reject) => {
+            await this.connection().query(sql, (error, result) => {
+                if (error)
+                    this.handleError(error, reject);
+
+                resolve(result);
+            });
         });
     }
 
-    handleQueryCallback(error, result, callback) {
-        if (error)
-            callback(error);
-
-        callback(result);
+    handleError(error, reject){
+        if (error.code === 'ECONNREFUSED')
+            reject("Database connection refused");
+        else
+            reject(error);
     }
 }
 

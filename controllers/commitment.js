@@ -6,20 +6,42 @@ class CommitmentController{
         this.commitmentManager = new CommitmentManager();
     }
 
-    getCommitments(req, res) {
-        this.commitmentManager.getCommitments((commitments) => {
-            res.send(commitments);
+    getCommitments(_request, response) {
+        this.commitmentManager.getCommitments()
+        .then((commitments) => {
+            response.send(commitments);
+        })
+        .catch((error) => {
+            this.handleError(response, error);
         });
     }
 
-    addCommitment(req, res){
-        var commitmentDto = req.body.commitment;
-        this.commitmentManager.addCommitment(commitmentDto, (error) => {
-            if (!error) 
-                res.send(error);
-            else
-                res.sendStatus(200);
+    getCommitment(request, response) {
+        this.commitmentManager.getCommitment(request.params.commitmentId)
+        .then((commitments) => {
+            response.send(commitments);
+        })
+        .catch((error) => {
+            this.handleError(response, error);
         });
+    }
+
+    addCommitment(request, response) {
+        var commitmentDto = request.body.commitment;
+        this.commitmentManager.addCommitment(commitmentDto)
+        .then((error) => {
+            if (error) 
+                this.handleError(response, error)
+            else
+                response.sendStatus(200);
+        })
+        .catch(error => {
+            this.handleError(response, error);
+        });
+    }
+
+    handleError(response, error) {
+        response.status(500).send(error);
     }
 }
 

@@ -4,12 +4,16 @@ class CommitmentRepository{
         this.dbConnection = dbConnection;
     }
 
-    getCommitments(callback) {
-        this.dbConnection.getAll("commitment", callback);
+    getCommitments() {
+        return this.dbConnection.getAll("commitment");
     }
 
-    addCommitment(commitment, callback) {
-        this.dbConnection.add("commitment", commitment, callback);
+    getCommitment(commitmentId) {
+        return this.dbConnection.getById("commitment", commitmentId);
+    }
+
+    addCommitment(commitment) {
+        return this.dbConnection.add("commitment", commitment);
     }
 }
 

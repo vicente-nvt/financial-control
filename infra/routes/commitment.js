@@ -8,6 +8,10 @@ module.exports = (application) => {
         commitmentController.getCommitments(req, res);
     });
 
+    application.get("/commitment/:commitmentId", (req, res) => {
+        commitmentController.getCommitment(req, res);
+    });
+
     application.post("/commitment", (req, res) => {
         commitmentController.addCommitment(req, res);
     });

@@ -1,5 +1,5 @@
 module.exports = { 
-    "up" : "CREATE TABLE commitment (" 
+    "up" : "CREATE if not exists TABLE commitment (" 
         + "id int(11) NOT NULL auto_increment,"
         + "description varchar(255) NOT NULL,"
         + "effectiveValue decimal(19,2) NOT NULL,"

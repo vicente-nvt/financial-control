@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jasmine ./tests/*.js",
-    "migrate": "node ./config/migration.js up"
+    "migrate": "node ./infra/migration.js up",
+    "start": "npm run migrate && node app.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,12 @@
     "body-parser": "^1.18.3",
     "consign": "^0.1.6",
     "express": "^4.16.4",
+    "express-validator": "^5.3.1",
     "jasmine": "^3.3.0",
     "mysql": "^2.16.0",
     "mysql-migrations": "^1.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.1"
   }
 }

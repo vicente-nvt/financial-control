@@ -1,5 +1,6 @@
-var CommitmentRepository = require("../domain/commitment/repository");
-var DatabaseConnection = require("../infra/config/dbConnection");
+var CommitmentRepository = require('../domain/commitment/repository');
+var DatabaseConnection = require('../infra/config/dbConnection');
+var { check, validationResult } = require('express-validator/check');
 
 class CommitmentManager {
 
@@ -8,12 +9,16 @@ class CommitmentManager {
         this.commitmentRepository = new CommitmentRepository(this.databaseConnection);
     }
 
-    getCommitments(callback) {
-        this.commitmentRepository.getCommitments(callback);
+    getCommitments() {
+        return this.commitmentRepository.getCommitments();
     }
 
-    addCommitment(commitment, callback) {
-        this.commitmentRepository.addCommitment(commitment, callback);
+    getCommitment(commitmentId) {
+        return this.commitmentRepository.getCommitment(commitmentId);
+    }
+
+    addCommitment(commitment) {
+        return this.commitmentRepository.addCommitment(commitment);
     }
 }
 
