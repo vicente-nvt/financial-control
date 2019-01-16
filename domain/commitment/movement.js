@@ -1,6 +1,6 @@
 var Movement = {
-    IN : 1,
-    OUT : 2 
+  IN: 0,
+  OUT: 1
 }
 
-module.exports = Movement;
+module.exports = Movement

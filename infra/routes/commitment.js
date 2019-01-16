@@ -1,18 +1,17 @@
-var CommitmentController = require("../../controllers/commitment");
+var CommitmentController = require('../../controllers/commitment')
 
-module.exports = (application) => {
+module.exports = application => {
+  var commitmentController = new CommitmentController()
 
-    var commitmentController = new CommitmentController();
+  application.get('/commitments', (req, res) => {
+    commitmentController.getCommitments(req, res)
+  })
 
-    application.get("/commitments", (req, res) => {
-        commitmentController.getCommitments(req, res);
-    });
+  application.get('/commitment/:commitmentId', (req, res) => {
+    commitmentController.getCommitment(req, res)
+  })
 
-    application.get("/commitment/:commitmentId", (req, res) => {
-        commitmentController.getCommitment(req, res);
-    });
-
-    application.post("/commitment", (req, res) => {
-        commitmentController.addCommitment(req, res);
-    });
-};
+  application.post('/commitment', (req, res) => {
+    commitmentController.addCommitment(req, res)
+  })
+}
