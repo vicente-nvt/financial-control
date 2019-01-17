@@ -28,7 +28,7 @@ class CommitmentController {
   }
 
   addCommitment (request, response) {
-    var commitmentDto = request.body.commitment
+    var commitmentDto = request.body
     this.commitmentManager
       .addCommitment(commitmentDto)
       .then(error => {

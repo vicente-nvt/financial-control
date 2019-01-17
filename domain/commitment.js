@@ -1,4 +1,4 @@
-var Validator = require('../../helpers/validator')
+var Validator = require('../helpers/validator')
 var Movement = require('./movement')
 
 class Commitment {

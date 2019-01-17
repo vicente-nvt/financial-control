@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "jasmine ./tests/*.js",
-    "migrate": "node ./infra/migration.js up",
+    "migrate": "node ./infra/database/migration.js up",
     "start": "npm run migrate && node app.js"
   },
   "repository": {

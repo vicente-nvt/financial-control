@@ -1,5 +1,5 @@
-var CommitmentRepository = require('../domain/commitment/repository')
-var DatabaseConnection = require('../infra/config/dbConnection')
+var CommitmentRepository = require('../domain/repository')
+var DatabaseConnection = require('../infra/database/dbConnection')
 var Commitment = require('../domain/commitment')
 
 class CommitmentManager {
@@ -17,7 +17,16 @@ class CommitmentManager {
   }
 
   addCommitment (commitment) {
-    return this.commitmentRepository.addCommitment(commitment)
+    let commitmentCreated = new Commitment(
+      commitment.description,
+      commitment.expectedValue,
+      commitment.expiryDate,
+      commitment.movementIndicator,
+      commitment.plotNumber,
+      commitment.totalOfPlots
+    )
+
+    return this.commitmentRepository.addCommitment(commitmentCreated)
   }
 }
 

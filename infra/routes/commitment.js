@@ -11,7 +11,7 @@ module.exports = application => {
     commitmentController.getCommitment(req, res)
   })
 
-  application.post('/commitment', (req, res) => {
+  application.post('/commitments', (req, res) => {
     commitmentController.addCommitment(req, res)
   })
 }

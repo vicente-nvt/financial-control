@@ -1,5 +1,5 @@
-let Commitment = require('../domain/commitment/commitment')
-let Movement = require('../domain/commitment/movement')
+let Commitment = require('../domain/commitment')
+let Movement = require('../domain/movement')
 
 class CommitmentBuilder {
   constructor () {

@@ -1,5 +1,5 @@
 var CommitmentBuilder = require('../helpers/commitmentBuilder')
-var Movement = require('../domain/commitment/movement')
+var Movement = require('../domain/movement')
 
 describe('Commitment creation', () => {
   it('should create a commitment with a description', () => {
