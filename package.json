@@ -4,7 +4,7 @@
   "description": "a financial control system",
   "main": "app.js",
   "scripts": {
-    "test": "jasmine ./tests/*.js",
+    "test": "jasmine ./tests/src/*.js",
     "migrate": "node ./infra/database/migration.js up",
     "start": "npm run migrate && node app.js"
   },
