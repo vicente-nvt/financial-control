@@ -7,7 +7,7 @@ module.exports = application => {
     commitmentController.getCommitments(req, res)
   })
 
-  application.get('/commitment/:commitmentId', (req, res) => {
+  application.get('/commitments/:commitmentId', (req, res) => {
     commitmentController.getCommitment(req, res)
   })
 
