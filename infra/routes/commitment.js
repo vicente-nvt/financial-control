@@ -1,15 +1,7 @@
 var CommitmentController = require('../../controllers/commitment')
 
-module.exports = application => {
-  var commitmentController = new CommitmentController()
-
-  application.get('/commitments', (req, res) => {
-    commitmentController.getCommitments(req, res)
-  })
-
-  application.get('/commitments/:commitmentId', (req, res) => {
-    commitmentController.getCommitment(req, res)
-  })
+module.exports = (application) => {
+  var commitmentController = new CommitmentController(application.get('databaseConnection'))
 
   application.post('/commitments', (req, res) => {
     commitmentController.addCommitment(req, res)

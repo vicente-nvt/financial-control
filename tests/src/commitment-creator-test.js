@@ -1,4 +1,4 @@
-var CommitmentManager = require('../../application/commitment-manager')
+var CommitmentCreator = require('../../application/commitment-creator')
 var CommitmentBuilder = require('../helpers/commitmentBuilder')
 
 describe('Commitment manager tests', () => {
@@ -10,7 +10,7 @@ describe('Commitment manager tests', () => {
     const plotNumber = 1
     const totalOfPlots = 10
     let commitmentRepository = jasmine.createSpyObj('CommitmentRepository', ['addCommitment'])
-    let commitmentManager = new CommitmentManager()
+    let commitmentManager = new CommitmentCreator()
     commitmentManager.commitmentRepository = commitmentRepository
     commitmentManager.databaseConnection = jasmine.createSpyObj('DatabaseConnection', ['addCommitment'])
     var expectedCommitment = CommitmentBuilder.new()

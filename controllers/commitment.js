@@ -1,47 +1,24 @@
-var CommitmentManager = require('../application/commitment-manager')
+var CommitmentCreator = require('../application/commitment-creator')
+var CommitmentRepository = require('../infra/database/commitment-repository')
 
 class CommitmentController {
-  constructor () {
-    this.commitmentManager = new CommitmentManager()
+  constructor(databaseConnection) {
+    let commitmentRepository = new CommitmentRepository(databaseConnection);
+    this.commitmentCreator = new CommitmentCreator(commitmentRepository);
   }
 
-  getCommitments (_request, response) {
-    this.commitmentManager
-      .getCommitments()
-      .then(commitments => {
-        response.send(commitments)
-      })
-      .catch(error => {
-        this.handleError(response, error)
-      })
-  }
-
-  getCommitment (request, response) {
-    this.commitmentManager
-      .getCommitment(request.params.commitmentId)
-      .then(commitments => {
-        response.send(commitments)
-      })
-      .catch(error => {
-        this.handleError(response, error)
-      })
-  }
-
-  addCommitment (request, response) {
+  addCommitment(request, response) {
     var commitmentDto = request.body
-    this.commitmentManager
-      .addCommitment(commitmentDto)
-      .then(error => {
-        if (error) this.handleError(response, error)
-        else response.sendStatus(200)
+    this.commitmentCreator.addCommitment(commitmentDto)
+      .then((exception) => {
+        if (exception)
+          response.sendStatus(400);
+        else
+          response.sendStatus(201)
       })
-      .catch(error => {
-        this.handleError(response, error)
+      .catch((error) => {
+        response.status(500).send(error)
       })
-  }
-
-  handleError (response, error) {
-    response.status(500).send(error)
   }
 }
 

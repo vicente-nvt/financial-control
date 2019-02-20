@@ -2,7 +2,7 @@ var { validate, isNullOrUndefined } = require('./validator');
 var Movement = require('./movement')
 
 class Commitment {
-  constructor (description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
+  constructor(description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
     this.validateEntryData(description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots)
 
     this.description = description
@@ -14,7 +14,7 @@ class Commitment {
     this.totalOfPlots = totalOfPlots
   }
 
-  validateEntryData (description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
+  validateEntryData(description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
     validate(isNullOrUndefined(description) || description.trim() === '', 'It is not possible to create a commitment without a valid description')
     validate(isNullOrUndefined(expectedValue) || expectedValue <= 0, 'It is not possible to create a commitment without a valid expected value')
     validate(isNullOrUndefined(expiryDate), 'It is not possible to create a commitment without a valid expiry date')
@@ -24,4 +24,5 @@ class Commitment {
     validate(totalOfPlots < plotNumber, 'It is not possible to create a commitment with total plots count less than plot number')
   }
 }
+
 module.exports = Commitment
