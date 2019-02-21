@@ -10,11 +10,11 @@ class CommitmentController {
   addCommitment(request, response) {
     var commitmentDto = request.body
     this.commitmentCreator.addCommitment(commitmentDto)
-      .then((exception) => {
-        if (exception)
+      .then((result) => {
+        if (result instanceof Error)
           response.sendStatus(400);
         else
-          response.sendStatus(201)
+          response.status(201).send(result);
       })
       .catch((error) => {
         response.status(500).send(error)

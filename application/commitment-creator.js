@@ -5,25 +5,25 @@ class CommitmentCreator {
     this.commitmentRepository = commitmentRepository;
   }
 
-  addCommitment(commitment) {
+  addCommitment(newCommitment) {
     return new Promise((resolve, reject) => {
 
-      let commitmentCreated
+      let commitment
       try {
-        commitmentCreated = new Commitment(
-          commitment.description,
-          commitment.expectedValue,
-          commitment.expiryDate,
-          commitment.movementIndicator,
-          commitment.plotNumber,
-          commitment.totalOfPlots
+        commitment = new Commitment(
+          newCommitment.description,
+          newCommitment.expectedValue,
+          newCommitment.expiryDate,
+          newCommitment.movementIndicator,
+          newCommitment.plotNumber,
+          newCommitment.totalOfPlots
         )
       } catch (error) {
         resolve(error)
       }
 
-      this.commitmentRepository.addCommitment(commitmentCreated)
-      .then(() => { resolve() })
+      this.commitmentRepository.addCommitment(commitment)
+      .then((commitmentCreated) => { resolve({ id: commitmentCreated._id}) })
       .catch((error) => { reject(error) })
     })
   }
