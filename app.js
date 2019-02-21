@@ -1,5 +1,5 @@
-var app = require("./infra/config/server");
+var server = require("./infra/config/server");
 
-app.listen(app.get('port'), () => {
-    console.log("Servidor Online");
+server.listen(server.port, () => {
+    console.log("Server Online");
 });
