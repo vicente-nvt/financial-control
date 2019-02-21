@@ -1,5 +1,5 @@
 var CommitmentCreator = require('../../application/commitment-creator')
-var CommitmentBuilder = require('../helpers/commitmentBuilder')
+var CommitmentBuilder = require('../helpers/commitment-builder')
 
 describe('Commitment manager tests', () => {
   it('addCommitment method should call repository passing a Commitment', () => {

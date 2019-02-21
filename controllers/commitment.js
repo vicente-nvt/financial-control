@@ -1,5 +1,5 @@
 var CommitmentCreator = require('../application/commitment-creator')
-var CommitmentRepository = require('../infra/database/commitment-repository')
+var CommitmentRepository = require('../infra/data-access/commitment-repository')
 
 class CommitmentController {
   constructor(databaseConnection) {
