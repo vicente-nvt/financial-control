@@ -10,9 +10,8 @@ describe('Commitment manager tests', () => {
     const plotNumber = 1
     const totalOfPlots = 10
     let commitmentRepository = jasmine.createSpyObj('CommitmentRepository', ['addCommitment'])
-    let commitmentManager = new CommitmentCreator()
-    commitmentManager.commitmentRepository = commitmentRepository
-    commitmentManager.databaseConnection = jasmine.createSpyObj('DatabaseConnection', ['addCommitment'])
+    commitmentRepository.addCommitment.and.returnValue(Promise.resolve())
+    let commitmentCreator = new CommitmentCreator(commitmentRepository)
     var expectedCommitment = CommitmentBuilder.new()
       .withDescription(description)
       .withExpectedValue(expectedValue)
@@ -30,7 +29,7 @@ describe('Commitment manager tests', () => {
       totalOfPlots: totalOfPlots
     }
 
-    commitmentManager.addCommitment(commitment)
+    commitmentCreator.addCommitment(commitment)
 
     expect(commitmentRepository.addCommitment).toHaveBeenCalledWith(expectedCommitment)
   })

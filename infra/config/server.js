@@ -1,21 +1,17 @@
 var express = require('express')
 var consign = require('consign')
 var bodyParser = require('body-parser')
-var databaseConnection = require('./databaseConnection')
+var configureDatabase = require('./database/middleware')
 var configuration = require('./configuration')
 
 var app = express()
 
+let databaseConnection = configureDatabase(configuration.databaseConnectionString)
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-app.set('databaseConnection', databaseConnection.connectDatabase(configuration.databaseConnectionString));
-
-app.use((req, res, next) => {
-  databaseConnection.checkConnection();
-
-  next(req, res);
-})
+app.use(databaseConnection.checkConnection)
+app.database = databaseConnection.getDatabase();
 
 consign()
   .include('infra/routes')
