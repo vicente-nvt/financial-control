@@ -2,7 +2,7 @@ let Commitment = require('../../domain/commitment')
 let Movement = require('../../domain/movement')
 
 class CommitmentBuilder {
-  constructor () {
+  constructor() {
     this.description = 'A new commitment'
     this.expectedValue = 1000.0
     this.expiryDate = new Date(2018, 1, 30)
@@ -11,41 +11,41 @@ class CommitmentBuilder {
     this.totalOfPlots = 10
   }
 
-  static new () {
+  static new() {
     return new CommitmentBuilder()
   }
 
-  withDescription (description) {
+  withDescription(description) {
     this.description = description
     return this
   }
 
-  withExpectedValue (expectedValue) {
+  withExpectedValue(expectedValue) {
     this.expectedValue = expectedValue
     return this
   }
 
-  withExpiryDate (expiryDate) {
+  withExpiryDate(expiryDate) {
     this.expiryDate = expiryDate
     return this
   }
 
-  withMovementIndicator (movementIndicator) {
+  withMovementIndicator(movementIndicator) {
     this.movementIndicator = movementIndicator
     return this
   }
 
-  withPlotNumber (plotNumber) {
+  withPlotNumber(plotNumber) {
     this.plotNumber = plotNumber
     return this
   }
 
-  withTotalOfPlots (totalOfPlots) {
+  withTotalOfPlots(totalOfPlots) {
     this.totalOfPlots = totalOfPlots
     return this
   }
 
-  build () {
+  build() {
     return new Commitment(
       this.description,
       this.expectedValue,

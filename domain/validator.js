@@ -1,8 +1,8 @@
-function validate (condition, message) {
+function validate(condition, message) {
   if (condition) throw new Error(message)
 }
 
-function isNullOrUndefined (value) {
+function isNullOrUndefined(value) {
   return value == undefined || value == null
 }
 

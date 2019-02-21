@@ -23,8 +23,8 @@ class CommitmentCreator {
       }
 
       this.commitmentRepository.addCommitment(commitment)
-      .then((commitmentCreated) => { resolve({ id: commitmentCreated._id}) })
-      .catch((error) => { reject(error) })
+        .then((commitmentCreated) => { resolve({ id: commitmentCreated._id }) })
+        .catch((error) => { reject(error) })
     })
   }
 }

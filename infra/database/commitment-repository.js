@@ -16,7 +16,7 @@ class CommitmentRepository {
     }
 
     addCommitment(commitment) {
-        
+
         let commitmentCreated = new this.Commitment({
             description: commitment.description,
             expectedValue: commitment.expectedValue,
