@@ -1,8 +1,8 @@
 var express = require('express')
 var consign = require('consign')
 var bodyParser = require('body-parser')
-var configureDatabase = require('./database/middleware')
-var configuration = require('./configuration')
+var configureDatabase = require('./config/database/middleware')
+var configuration = require('./config/configuration')
 
 var appServer = express()
 
