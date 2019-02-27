@@ -1,5 +1,6 @@
 var { validate, isNullOrUndefined } = require('./validator');
 var Movement = require('./movement')
+var Payment = require('./payment')
 
 class Commitment {
   constructor(description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
@@ -12,6 +13,7 @@ class Commitment {
     this.movementIndicator = movementIndicator
     this.plotNumber = plotNumber
     this.totalOfPlots = totalOfPlots
+    this.payments = [];
   }
 
   validateEntryData(description, expectedValue, expiryDate, movementIndicator, plotNumber, totalOfPlots) {
@@ -22,6 +24,16 @@ class Commitment {
     validate(isNullOrUndefined(plotNumber) || plotNumber <= 0, 'It is not possible to create a commitment without a valid plot number')
     validate(isNullOrUndefined(totalOfPlots) || totalOfPlots <= 0, 'It is not possible to create a commitment without a valid total of plots')
     validate(totalOfPlots < plotNumber, 'It is not possible to create a commitment with total plots count less than plot number')
+  }
+
+  pay(paymentValue) {
+    let payment = new Payment(paymentValue);
+
+    this.payments.push(payment);
+  }
+
+  get hasPayments(){
+    return this.payments.length > 0;
   }
 }
 

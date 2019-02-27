@@ -9,7 +9,8 @@ class CommitmentRepository {
             expiryDate: { type: Date, required: true },
             movementIndicator: { type: Number, required: true },
             plotNumber: { type: Number, required: true },
-            totalOfPlots: { type: Number, required: true }
+            totalOfPlots: { type: Number, required: true },
+            payments: { type: Array }
         });
 
         this.Commitment = databaseConnection.model('Commitment', commitmentSchema);
@@ -24,11 +25,20 @@ class CommitmentRepository {
             expiryDate: commitment.expiryDate,
             movementIndicator: commitment.movementIndicator,
             plotNumber: commitment.plotNumber,
-            totalOfPlots: commitment.totalOfPlots
+            totalOfPlots: commitment.totalOfPlots,
+            payments: []
         })
 
         return commitmentCreated.save();
     }
+
+    addPayment(commitmentId, payment) {
+        this.Commitment.update(
+            { _id: commitmentId },
+            { $push: { payments: payment } },
+            done)
+    }
+
 }
 
 module.exports = CommitmentRepository;

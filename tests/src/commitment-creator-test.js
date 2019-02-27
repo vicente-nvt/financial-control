@@ -9,8 +9,9 @@ describe('Commitment manager tests', () => {
     const movementIndicator = 0
     const plotNumber = 1
     const totalOfPlots = 10
+    const promisedCommitment = { _id: 1 }
     let commitmentRepository = jasmine.createSpyObj('CommitmentRepository', ['addCommitment'])
-    commitmentRepository.addCommitment.and.returnValue(Promise.resolve())
+    commitmentRepository.addCommitment.and.returnValue(Promise.resolve(promisedCommitment))
     let commitmentCreator = new CommitmentCreator(commitmentRepository)
     var expectedCommitment = CommitmentBuilder.new()
       .withDescription(description)

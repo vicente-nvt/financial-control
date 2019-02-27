@@ -1,7 +1,9 @@
-var CommitmentBuilder = require('../helpers/commitmentBuilder')
+var CommitmentBuilder = require('../helpers/commitment-builder')
 var Movement = require('../../domain/movement')
+var Payment = require('../../domain/payment')
 
 describe('Commitment creation', () => {
+
   it('should create a commitment with a description', () => {
     let expectedDescription = 'Car rent'
 
@@ -168,5 +170,30 @@ describe('Commitment creation', () => {
         .build()
 
     expect(act).toThrow(new Error(expectedMessage))
+  })
+
+  it('should create a commitment with an empty array of payments', () => {
+    let commitment = CommitmentBuilder.new().build();
+
+    expect(commitment.payments).toBeDefined();
+  })
+
+  it('should create a commitment without payments', () => {
+    let commitment = CommitmentBuilder.new().build();
+    
+    expect(commitment.hasPayments).toBe(false);
+  })
+})
+
+describe ('Commitment payment', () => {
+  it('Should be possible to add a payment', () => {
+    let expectedValue = 100.0
+    let paymentValue = 50.0
+    let commitment = CommitmentBuilder.new().withExpectedValue(expectedValue).build();
+    let payment = new Payment(paymentValue)
+
+    commitment.pay(paymentValue);
+
+    expect(commitment.payments[0]).toEqual(payment);
   })
 })
