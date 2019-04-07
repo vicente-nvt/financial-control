@@ -1,13 +1,13 @@
 var { validate, isNullOrUndefined } = require('./validator')
 
 class Payment {
-    constructor(paymentValue) {
+	constructor(paymentValue) {
+		validate(isNullOrUndefined(paymentValue),
+			'It is not possible to create a payment without the value')
 
-        validate(isNullOrUndefined(paymentValue), 'It is not possible to create a payment without the value')
-
-        this.value = paymentValue;
-        this.date = new Date();
-    }
+		this.value = paymentValue
+		this.date = new Date()
+	}
 }
 
 module.exports = Payment
