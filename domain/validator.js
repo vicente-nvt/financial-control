@@ -1,8 +1,8 @@
-const ExceptionDomain = require('./domain-exception')
+const DomainException = require('./domain-exception')
 
 function validate(condition, message) {
 	if (condition)
-		throw new ExceptionDomain(message)
+		throw new DomainException(message)
 }
 
 function isNullOrUndefined(value) {

@@ -1,3 +1,4 @@
+const DomainException = require('../../domain/domain-exception')
 const ExpenseBuilder = require('../helpers/expense-builder')
 const Payment = require('../../domain/payment')
 
@@ -88,8 +89,10 @@ describe('Expense creation', () => {
 })
 
 describe('Expense payment', () => {
+
+	let expectedValue = 100.0 
+
 	it('should be possible to add a payment', () => {
-		let expectedValue = 100.0
 		let paymentValue = 50.0
 		let expense = ExpenseBuilder.new().withValue(expectedValue).build()
 		let payment = new Payment(paymentValue)
@@ -99,13 +102,15 @@ describe('Expense payment', () => {
 		expect(expense.payments[0]).toEqual(payment)
 	})
 
-	it('should not be possible to add a payment greater than the expense value', () => {
-		let expectedValue = 100.0
-		let paymentValue = 150.0
+	it('should not be possible to add a payment greater than the open value', () => {
+		let firstPaymentValue = 90.0
+		let secondPaymentValue = 15.0
 		let expense = ExpenseBuilder.new().withValue(expectedValue).build()
+		expense.pay(firstPaymentValue)
 
-		let act = () => { expense.pay(paymentValue) }
+		let act = () => expense.pay(secondPaymentValue)
 
-		expect(act).toThrow(new Error('It is not possible to add a payment greater than the effective value'))
+		expect(act).toThrow(new DomainException(
+			'It is not possible to add a payment greater than the open value'))
 	})
 })

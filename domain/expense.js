@@ -1,4 +1,4 @@
-var { validate, isNullOrUndefined } = require('./validator');
+var { validate, isNullOrUndefined } = require('./validator')
 var Payment = require('./payment')
 
 class Expense {
@@ -21,11 +21,15 @@ class Expense {
 	}
 
 	pay(paymentValue) {
-		validate(paymentValue > this.value,
-			'It is not possible to add a payment greater than the effective value')
+		validate(paymentValue > this.openValue,
+			'It is not possible to add a payment greater than the open value')
 
 		let payment = new Payment(paymentValue)
 		this.payments.push(payment)
+	}
+
+	get openValue() {
+		return this.value - this.paidValue
 	}
 
 	get paidValue() {
