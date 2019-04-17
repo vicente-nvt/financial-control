@@ -1,3 +1,5 @@
+const Expense = require('../../domain/expense')
+
 class ExpenseRepository {
 
 	constructor(databaseConnection) {
@@ -20,6 +22,27 @@ class ExpenseRepository {
 		})
 
 		return expenseCreated.save()
+	}
+
+	findById(id) {
+		return new Promise((resolve, reject) => {
+			this.Expense.findById(id)
+				.then((foundExpense) => {
+					let expense = new Expense(
+						foundExpense.description,
+						foundExpense.value,
+						foundExpense.dueDate
+					)
+
+					expense.payments = foundExpense.payments
+					resolve(expense)
+				})
+				.catch(error => reject(error))
+		})
+	}
+
+	update(id, expense) {
+		return this.Expense.findByIdAndUpdate(id, expense)
 	}
 }
 
